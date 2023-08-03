@@ -1,12 +1,12 @@
-const { Configuration, OpenAIApi } = require("openai");
+import { Configuration, OpenAIApi } from 'openai';
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY || '',
 });
 
 const openai = new OpenAIApi(configuration);
 
-export async function POST(request) {
+export async function POST(request: Request): Promise<Response> {
   const { prompt } = await request.json();
 
   const response = await openai.createImage({
